@@ -26,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $descripcion = trim($descripciones[$i] ?? "");
         $montoTexto  = trim($montos[$i] ?? "");
 
-        // Si la fila está vacía, la ignoramos
         if ($descripcion === "" || $montoTexto === "") {
             continue;
         }
@@ -46,10 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 // Variables de resultados
-$totalContado    = 0;
+$totalContado = 0;
 $totalConInteres = 0;
-$cashback        = 0;
-$montoFinal      = 0;
+$cashback = 0;
+$montoFinal = 0;
 
 // Solo calculamos si hay transacciones
 if (!empty($transacciones)) {
@@ -58,8 +57,8 @@ if (!empty($transacciones)) {
         $totalContado += $t["monto"];
     }
 
-    $interes            = 0.026;  // 2.6%
-    $cashbackPorcentaje = 0.001;  // 0.1%
+    $interes = 0.026;
+    $cashbackPorcentaje = 0.001;
 
     $totalConInteres = $totalContado * (1 + $interes);
     $cashback        = $totalContado * $cashbackPorcentaje;
@@ -86,13 +85,12 @@ if (!empty($transacciones)) {
     <?php if (empty($transacciones)) : ?>
 
         <div class="alert alert-warning">
-            No se ingresaron transacciones válidas. Por favor, vuelva al formulario.
+            No se ingresaron transacciones válidas, vuelva a intentarlo.
         </div>
 
     <?php else : ?>
 
         <div class="row">
-            <!-- Columna izquierda: tabla de transacciones -->
             <div class="col-12 mb-3">
                 <h6 class="mb-2">Transacciones ingresadas</h6>
 
@@ -102,7 +100,7 @@ if (!empty($transacciones)) {
                         <tr>
                             <th>#</th>
                             <th>Descripción</th>
-                            <th>Monto (₡)</th>
+                            <th>Monto (en colones)</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -118,7 +116,6 @@ if (!empty($transacciones)) {
                 </div>
             </div>
 
-            <!-- Columna derecha: resumen de resultados (visual dentro del iframe) -->
             <div class="col-12">
                 <h6 class="mb-2">Resumen de resultados</h6>
                 <div class="border rounded p-3 bg-light">

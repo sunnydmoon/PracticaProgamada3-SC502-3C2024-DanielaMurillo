@@ -6,115 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Estado de Cuenta | Tarjeta de Crédito</title>
 
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel="stylesheet"
           crossorigin="anonymous">
 
-    <!-- Tu CSS -->
-    <link rel="stylesheet" href="ASSETS/CSS/estilo.css" />
+    <link rel="stylesheet" href="assetes/css/estilo.css" />
 </head>
 
 <body>
 <div class="container mt-5">
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Estado de Cuenta - Ingreso de Transacciones</h4>
+            <h4 class="mb-0">Práctica Programada 3 - Tarjeta de Crédito</h4>
         </div>
 
         <div class="card-body">
             <p class="mb-3">
-                Ingrese las transacciones realizadas con la tarjeta de crédito.
-                Puede dejar filas en blanco si no las necesita.
-                Al enviar el formulario, el sistema calculará:
-                <strong>monto de contado, monto con interés (2.6%), cashback (0.1%) y monto final a pagar</strong>
-                y mostrará los resultados en la columna <strong>RESULTADOS</strong> de la derecha.
+                Bienvenida/o al sistema de <strong>Estado de Cuenta de Tarjeta de Crédito</strong>.
+            </p>
+            <p class="mb-3">
+                En este ejercicio podrá registrar manualmente varias transacciones realizadas con una tarjeta
+                de crédito, calcular:
+            </p>
+            <ul>
+                <li>Monto total de contado (suma de todas las transacciones).</li>
+                <li>Monto total con interés del <strong>2.6%</strong>.</li>
+                <li>Cashback del <strong>0.1%</strong> sobre el monto de contado.</li>
+                <li>Monto final a pagar.</li>
+            </ul>
+            <p class="mb-3">
+                El sistema mostrará los resultados en pantalla y generará un archivo
+                <code>estado_cuenta.txt</code> con los mismos datos y cálculos.
             </p>
 
-            <div class="row">
-                <!-- ========================= -->
-                <!--  COLUMNA IZQUIERDA: FORM  -->
-                <!-- ========================= -->
-                <div class="col-md-6 mb-3">
-                    <h5 class="mb-3">Transacciones</h5>
-
-                    <!-- IMPORTANTE: target="resultadoFrame" -->
-                    <form action="estado_cuenta.php" method="post" target="resultadoFrame">
-
-                        <div class="table-responsive mb-3">
-                            <table class="table table-bordered align-middle">
-                                <thead class="table-light">
-                                <tr>
-                                    <th style="width: 15%;">ID</th>
-                                    <th style="width: 50%;">Descripción</th>
-                                    <th style="width: 35%;">Monto (₡)</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <!-- Fila 1 -->
-                                <tr>
-                                    <td><input type="number" name="id[]" class="form-control" min="1" /></td>
-                                    <td><input type="text" name="descripcion[]" class="form-control" /></td>
-                                    <td><input type="number" name="monto[]" class="form-control" step="0.01" min="0" /></td>
-                                </tr>
-                                <!-- Fila 2 -->
-                                <tr>
-                                    <td><input type="number" name="id[]" class="form-control" min="1" /></td>
-                                    <td><input type="text" name="descripcion[]" class="form-control" /></td>
-                                    <td><input type="number" name="monto[]" class="form-control" step="0.01" min="0" /></td>
-                                </tr>
-                                <!-- Fila 3 -->
-                                <tr>
-                                    <td><input type="number" name="id[]" class="form-control" min="1" /></td>
-                                    <td><input type="text" name="descripcion[]" class="form-control" /></td>
-                                    <td><input type="number" name="monto[]" class="form-control" step="0.01" min="0" /></td>
-                                </tr>
-                                <!-- Fila 4 -->
-                                <tr>
-                                    <td><input type="number" name="id[]" class="form-control" min="1" /></td>
-                                    <td><input type="text" name="descripcion[]" class="form-control" /></td>
-                                    <td><input type="number" name="monto[]" class="form-control" step="0.01" min="0" /></td>
-                                </tr>
-                                <!-- Fila 5 -->
-                                <tr>
-                                    <td><input type="number" name="id[]" class="form-control" min="1" /></td>
-                                    <td><input type="text" name="descripcion[]" class="form-control" /></td>
-                                    <td><input type="number" name="monto[]" class="form-control" step="0.01" min="0" /></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-success">
-                                Generar estado de cuenta
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- ========================= -->
-                <!--  COLUMNA DERECHA: RESULTADOS -->
-                <!-- ========================= -->
-                <div class="col-md-6 mb-3">
-                    <h5 class="text-center mb-3">RESULTADOS</h5>
-                    <!-- Aquí se mostrará la respuesta de estado_cuenta.php -->
-                    <iframe name="resultadoFrame"
-                            class="w-100 iframe-resultados"
-                            style="min-height: 420px; border: 1px solid #ddd; border-radius: 4px;">
-                    </iframe>
-                </div>
+            <div class="d-flex justify-content-end mt-4">
+                <a href="index.php" class="btn btn-success">
+                    Ir al sistema de estado de cuenta
+                </a>
             </div>
         </div>
     </div>
 </div>
 
-<!-- JS Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
 
-<!-- Tu JS -->
-<script src="ASSETS/JS/main.js"></script>
+<script src="assetes/js/main.js"></script>
 </body>
 
 </html>

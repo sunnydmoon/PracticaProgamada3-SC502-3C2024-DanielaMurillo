@@ -1,17 +1,15 @@
 <?php
-// ====================================
-//   LÓGICA PHP: leer POST y calcular
-// ====================================
 
 // Arreglo de transacciones
 $transacciones = [];
 
 // Variables de resultados
-$totalContado    = 0;
+$totalContado = 0;
 $totalConInteres = 0;
-$cashback        = 0;
-$montoFinal      = 0;
-$hayResultados   = false;
+$cashback = 0;
+$montoFinal = 0;
+$hayResultados = false;
+$mensajeTxt = "";
 
 function registrarTransaccion($id, $descripcion, $monto)
 {
@@ -57,12 +55,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $totalContado += $t["monto"];
         }
 
-        $interes            = 0.026; // 2.6%
-        $cashbackPorcentaje = 0.001; // 0.1%
+        $interes = 0.026; 
+        $cashbackPorcentaje = 0.001; 
 
         $totalConInteres = $totalContado * (1 + $interes);
-        $cashback        = $totalContado * $cashbackPorcentaje;
-        $montoFinal      = $totalConInteres - $cashback;
+        $cashback = $totalContado * $cashbackPorcentaje;
+        $montoFinal = $totalConInteres - $cashback;
 
         $hayResultados = true;
     }
@@ -76,39 +74,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Estado de Cuenta | Tarjeta de Crédito</title>
 
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel="stylesheet"
           crossorigin="anonymous">
 
-    <!-- Tu CSS -->
-    <link rel="stylesheet" href="ASSETS/CSS/estilo.css" />
+    <link rel="stylesheet" href="assetes/css/estilo.css" />
 </head>
 
 <body>
 <div class="container mt-5">
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Estado de Cuenta - Ingreso de Transacciones</h4>
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">Estado de Cuenta - Ingreso de Transacciones</h4>
+                <a href="index.html" class="btn btn-light btn-sm">
+                    Volver al inicio
+                </a>
+            </div>
         </div>
 
         <div class="card-body">
             <p class="mb-3">
-                Ingrese las transacciones realizadas con la tarjeta de crédito.
-                Puede dejar filas en blanco si no las necesita.
-                Al presionar <strong>Imprimir resultados</strong>, el sistema calculará:
-                <strong>monto de contado, monto con interés (2.6%), cashback (0.1%) y monto final a pagar</strong>
-                y mostrará los resultados en la columna <strong>RESULTADOS</strong>.
+                Esta pagina esta creada para poder hacer el calculo total de
+                las transacciones bancarias utilizadas con su tarjeta de credito
+                Al presionar <strong>Imprimir resultados</strong>, el sistema le mostrará un resultado con
+                <strong>monto de contado, monto con interés (2.6%), cashback (0.1%) y monto final a pagar</strong>,
+                mostrará los resultados en la columna <strong>RESULTADOS</strong> y creará el archivo
+                <code>estado_cuenta.txt</code> con esos mismos datos.
             </p>
 
             <div class="row">
-                <!-- ========================= -->
-                <!--  COLUMNA IZQUIERDA: FORM  -->
-                <!-- ========================= -->
                 <div class="col-md-6 mb-3">
                     <h5 class="mb-3">Transacciones</h5>
 
-                    <!-- Importante: action vacío -> se envía a la MISMA página -->
                     <form action="" method="post">
 
                         <div class="table-responsive mb-3">
@@ -122,7 +120,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 </thead>
                                 <tbody>
                                 <?php
-                                // Pintamos 5 filas siempre
                                 for ($i = 0; $i < 5; $i++): ?>
                                     <tr>
                                         <td>
@@ -148,9 +145,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </form>
                 </div>
 
-                <!-- ========================= -->
-                <!--  COLUMNA DERECHA: RESULTADOS -->
-                <!-- ========================= -->
                 <div class="col-md-6 mb-3">
                     <h5 class="text-center mb-3">RESULTADOS</h5>
 
@@ -160,6 +154,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <strong>Imprimir resultados</strong>.
                         </div>
                     <?php else: ?>
+
+                        <!-- Mensaje sobre el archivo TXT -->
+                        <?php if ($mensajeTxt !== ""): ?>
+                            <div class="alert alert-secondary py-2">
+                                <?php echo htmlspecialchars($mensajeTxt); ?>
+                            </div>
+                        <?php endif; ?>
 
                         <!-- Tabla de transacciones -->
                         <h6 class="mb-2">Transacciones ingresadas</h6>
@@ -212,12 +213,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </div>
 </div>
 
-<!-- JS Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
 
-<!-- Tu JS -->
-<script src="ASSETS/JS/main.js"></script>
+<script src="assetes/js/main.js"></script>
 </body>
 
 </html>
