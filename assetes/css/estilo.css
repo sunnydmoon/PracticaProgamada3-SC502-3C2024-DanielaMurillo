@@ -1,0 +1,103 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #f3f4f6;
+    color: #222;
+}
+
+.contenedor {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.descripcion {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.card h2 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #1d4ed8;
+}
+
+
+.tabla-transacciones {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.tabla-transacciones th,
+.tabla-transacciones td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.tabla-transacciones th {
+    background-color: #2563eb;
+    color: white;
+}
+
+.resumen {
+    margin-top: 20px;
+}
+
+.resumen p {
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+.resaltado {
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.bloque-texto {
+    background-color: #111827;
+    color: #f9fafb;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-size: 13px;
+    overflow-x: auto;
+}
