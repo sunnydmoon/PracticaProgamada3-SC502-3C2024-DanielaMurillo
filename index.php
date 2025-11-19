@@ -9,12 +9,10 @@ $totalConInteres = 0;
 $cashback = 0;
 $montoFinal = 0;
 $hayResultados = false;
-$mensajeTxt = "";
 
 function registrarTransaccion($id, $descripcion, $monto)
 {
     global $transacciones;
-
     $transacciones[] = [
         "id" => $id,
         "descripcion" => $descripcion,
@@ -22,30 +20,24 @@ function registrarTransaccion($id, $descripcion, $monto)
     ];
 }
 
-// Si se envió el formulario
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    $ids           = isset($_POST["id"]) ? $_POST["id"] : [];
+    $ids = isset($_POST["id"]) ? $_POST["id"] : [];
     $descripciones = isset($_POST["descripcion"]) ? $_POST["descripcion"] : [];
-    $montos        = isset($_POST["monto"]) ? $_POST["monto"] : [];
+    $montos = isset($_POST["monto"]) ? $_POST["monto"] : [];
 
     for ($i = 0; $i < count($descripciones); $i++) {
 
-        $id          = isset($ids[$i]) ? intval($ids[$i]) : 0;
+        $id = isset($ids[$i]) ? intval($ids[$i]) : 0;
         $descripcion = trim($descripciones[$i] ?? "");
-        $montoTexto  = trim($montos[$i] ?? "");
+        $montoTexto = trim($montos[$i] ?? "");
 
-        // Si la fila está vacía, la ignoramos
         if ($descripcion === "" || $montoTexto === "") {
             continue;
         }
-
         $monto = floatval($montoTexto);
-
         if ($id <= 0) {
             $id = $i + 1;
         }
-
         registrarTransaccion($id, $descripcion, $monto);
     }
 
@@ -54,14 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         foreach ($transacciones as $t) {
             $totalContado += $t["monto"];
         }
-
-        $interes = 0.026; 
-        $cashbackPorcentaje = 0.001; 
-
+        $interes = 0.026;
+        $cashbackPorcentaje = 0.001;
         $totalConInteres = $totalContado * (1 + $interes);
         $cashback = $totalContado * $cashbackPorcentaje;
         $montoFinal = $totalConInteres - $cashback;
-
         $hayResultados = true;
     }
 }
@@ -95,12 +84,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <div class="card-body">
             <p class="mb-3">
-                Esta pagina esta creada para poder hacer el calculo total de
-                las transacciones bancarias utilizadas con su tarjeta de credito
-                Al presionar <strong>Imprimir resultados</strong>, el sistema le mostrará un resultado con
-                <strong>monto de contado, monto con interés (2.6%), cashback (0.1%) y monto final a pagar</strong>,
-                mostrará los resultados en la columna <strong>RESULTADOS</strong> y creará el archivo
-                <code>estado_cuenta.txt</code> con esos mismos datos.
+                Ingrese las transacciones realizadas con la tarjeta de crédito.
+                Puede dejar filas en blanco si no las necesita.
+                Al presionar <strong>Imprimir resultados</strong>, el sistema calculará:
+                monto de contado, monto con interés (2.6%), cashback (0.1%) y monto final a pagar
+                y mostrará los resultados en la columna <strong>RESULTADOS</strong>.
             </p>
 
             <div class="row">
@@ -154,13 +142,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <strong>Imprimir resultados</strong>.
                         </div>
                     <?php else: ?>
-
-                        <!-- Mensaje sobre el archivo TXT -->
-                        <?php if ($mensajeTxt !== ""): ?>
-                            <div class="alert alert-secondary py-2">
-                                <?php echo htmlspecialchars($mensajeTxt); ?>
-                            </div>
-                        <?php endif; ?>
 
                         <!-- Tabla de transacciones -->
                         <h6 class="mb-2">Transacciones ingresadas</h6>
